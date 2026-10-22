@@ -1,0 +1,319 @@
+ReliefPlan AI
+AI-Powered Emergency Resource Allocation & Decision Support System
+Complete project guide: purpose, flow, user inputs, processing, outputs, formulas, dashboard pages, testing, demo and viva preparation. Python course project.
+1. Project Overview
+ReliefPlan AI helps an emergency manager decide where limited relief supplies (food, water, medical kits) should go after a disaster. The user describes the disaster and the supplies on hand. The system predicts how many people will be affected in each area, ranks areas by priority, calculates shortages, computes a fair allocation with an optimizer, explains the reasoning, and lets the user test what-if changes.
+One-line pitch
+A system that predicts where a disaster will hit hardest, then calculates the best way to split limited supplies, and explains why.
+Why it is a strong project
+Predict, then optimize: an ML model feeds a linear-programming optimizer, so the project turns predictions into decisions.
+Fairness rule: every area keeps a minimum share of its need, so no area receives nothing.
+Explainable: SHAP and a priority-score breakdown show why an area was rated critical.
+Proven: the plan is compared with a simple equal-split baseline and the improvement is calculated, not typed in.
+Interactive: users enter inputs and test what-if scenarios on a dashboard.
+The six questions the system answers
+2. End-to-End Flow
+The flowchart shows every step from user input to dashboard output. Colours: grey = data, purple = machine learning, green = decision logic, yellow = user-facing input and output.
+Flow in words
+The user enters the disaster scenario and supplies on the dashboard.
+The system validates the inputs and cleans and scales the data.
+The ML model predicts affected people for each area.
+A priority score ranks the areas and assigns LOW, MEDIUM, HIGH or CRITICAL.
+Demand, shortage and coverage are calculated for each resource.
+The optimizer splits supplies across areas using priority and fairness rules.
+The system writes recommended actions in plain language.
+SHAP explains why each area got its rating.
+The user changes inputs in the what-if simulator, and steps 3 to 8 rerun.
+Everything is shown on the dashboard and recorded in the audit log.
+3. User Inputs
+These are the values the user provides. Each input has a range so the system can validate it.
+Note: Per-person needs (units of food, water and medical kits per person per 72 hours), priority weights, thresholds and the minimum coverage are assumptions, not facts from the data. The dashboard must label them as Assumption and let the user edit them.
+4. Processing Stages (Details)
+Stage 1: Input data
+Stage 2: Validate and clean
+Stage 3: ML prediction
+Stage 4: Priority score
+Stage 5: Demand and shortage
+Stage 6: Resource optimizer
+Stage 7: Recommended actions
+Stage 8: SHAP explanation
+Stage 9: What-if simulator
+Output: Dashboard and audit
+5. Formulas
+Priority score
+priority_i = w1*norm(impact_i) + w2*norm(predicted_demand_i)
++ w3*norm(shortage_i) + w4*norm(medical_need_i)
++ w5*accessibility_penalty_i
+w1 to w5 are weights that sum to 1 and come from a config file or sidebar sliders. norm() is min-max scaling inside the current scenario. Use only features that exist in your data.
+Note: These thresholds are adjustable defaults, not scientific constants.
+Demand, shortage and coverage
+demand_ik   = predicted_people_i * need_per_person_k * (duration / 72)
+shortage_ik = max(0, demand_ik - available_ik)
+coverage_k  = total_available_k / total_demand_k
+Optimizer (linear programming)
+Variable: x_ik = amount of resource k sent to area i, with x_ik at least 0.
+Maximise   sum over i and k of  priority_i * x_ik / demand_ik
+Subject to sum over i of x_ik <= supply_k      (never send more than you have)
+x_ik <= demand_ik                   (never send more than an area needs)
+x_ik >= floor * demand_ik           (fairness: every area keeps a minimum)
+If warehouse and distance data exist, extend to a transportation problem with a cost term. If not, show the message: Source optimization unavailable, no warehouse data.
+Impact of optimization
+baseline_i  = supply_k * demand_ik / total_demand_k   (equal share by need)
+reduction %  = (shortage_before - shortage_after) / shortage_before * 100
+Because both plans spend the same total supply, compare the shortage in critical and high priority areas, and the coverage of those areas. That is where the optimizer helps.
+Worked example (illustrative numbers)
+Water supply is 100 units. Minimum coverage is 25%. Three areas:
+Unmet need in critical and high areas: equal split = (50 - 33.3) + (60 - 40) = 36.7. AI plan = 0 + 20 = 20. Reduction = (36.7 - 20) / 36.7 = about 45%. The low-priority area still receives its 25% minimum.
+6. Outputs
+Every output must come from data, a trained model, or the optimizer. Anything the user configures is labelled Assumption.
+Action card wording
+7. Dashboard Pages
+User workflow
+Open the Command Center and review the situation.
+Select or enter the disaster scenario and supplies.
+Press RUN AI ANALYSIS.
+Read the AI summary and the area ranking.
+Click an area to see why it is rated that way.
+Review the allocation plan and recommended actions.
+Open the What-If Simulator and change the conditions.
+Compare Scenario A and Scenario B.
+Choose the preferred plan and apply it, which writes an audit entry.
+8. What-If Scenarios to Demonstrate
+9. Validation and Error Handling
+10. Technology and Project Structure
+data/                 raw and processed data
+core/data.py          load, validate, preprocess
+core/model.py         train, evaluate, predict
+core/priority.py      priority score and risk levels
+core/demand.py        demand, shortage, coverage
+core/optimizer.py     LP allocation
+core/explain.py       SHAP
+core/simulate.py      what-if and scenario comparison
+core/actions.py       recommended actions and warnings
+core/audit.py         decision log
+models/               saved models and metrics.json
+app/Home.py + pages/  Streamlit dashboard
+tests/                pytest tests
+README.md
+Note: Keep all ML and optimization code in core/. The Streamlit pages should only call these functions.
+11. Dataset Mapping
+Before coding, build this table from your real dataset. Do not assume column names.
+If a needed field does not exist (warehouses, distances, time series), either state that the feature is unavailable or create clearly labelled SYNTHETIC data using a documented script, and mark it SYNTHETIC in the dashboard.
+12. Model Evaluation
+Choose the best model by a stated metric (F1 or PR-AUC when classes are imbalanced). Use a stratified split, cross-validation and a fixed random seed. Do not rely on accuracy alone.
+13. Testing Checklist
+Allocation never exceeds supply.
+Allocation never exceeds an area's demand.
+Coverage stays between 0 and 100%.
+Priority scores stay between 0 and 1.
+Zero supply is handled without errors.
+The same inputs always give the same outputs.
+Changing a what-if slider changes the result in the expected direction.
+No page shows NaN, undefined, infinity or empty cards.
+Every audit entry contains inputs, model, allocation and solver status.
+14. Four-Week Build Plan
+Phase delivery (when using an AI coding assistant)
+Phase 1: inspect data and produce the feature map, then stop.
+Phase 2: data pipeline, models and metrics.
+Phase 3: priority, demand, optimizer and tests.
+Phase 4: actions and SHAP.
+Phase 5: simulator, comparison and audit.
+Phase 6: Streamlit UI and map.
+Phase 7: README, architecture diagram, limitations and demo script.
+Run and verify each phase before asking for the next one.
+15. Demo Script (5 minutes)
+Open the Command Center and enter a flood, High severity, 72 hours and supplies. Press RUN AI ANALYSIS.
+Show the AI summary and the ranked areas.
+Click the critical area and show the SHAP reasons.
+Show the allocation plan and the improvement over an equal split.
+In the simulator, cut water by 30% and show how the plan changes.
+Open Model Performance to show real metrics, then Audit to show the decision log.
+16. Limitations and Responsible Use
+This is a decision-support tool. Final decisions rest with emergency managers.
+Predictions are only as good as the dataset and are never certain.
+Per-person needs, weights and thresholds are assumptions and are labelled as such.
+SHAP describes how the model behaves. It does not prove cause and effect.
+Simulated results are not real-world outcomes.
+Warehouse routing is not available without distance data.
+Label every output on screen as PREDICTION, OPTIMIZATION, SIMULATION or RECOMMENDATION.
+17. Viva Questions and Answers
+18. Glossary
+# | Question | Answered by
+1 | What is happening? | Situation summary and KPIs
+2 | What is likely to happen next? | ML prediction of affected people
+3 | Which areas need attention first? | Priority score and risk levels
+4 | What should be sent, and where? | Optimizer allocation plan
+5 | Why did the AI decide this? | SHAP explanation and score breakdown
+6 | What if conditions change? | What-if simulator and scenario comparison
+Input | Type / range | Default | How it is used
+Disaster type | Choice: Flood, Earthquake, Cyclone, Wildfire | Flood | Sets per-person needs (for example, earthquakes raise medical need).
+Severity | Choice: Low, Moderate, High, Extreme | High | Scales the predicted number of affected people.
+Expected duration | 24 to 168 hours | 72 hours | Scales total demand (longer disaster means more supplies needed).
+Food available | 0 to 100,000 units | 40,000 | Supply limit for food in the optimizer.
+Water available | 0 to 100,000 units | 40,000 | Supply limit for water in the optimizer.
+Medical kits | 0 to 6,000 | 2,500 | Supply limit for medical kits in the optimizer.
+People affected per area | Whole number, 0 or more, per area | From dataset | Base for prediction, demand and shortage.
+Priority weights (advanced) | Sliders, total 1.0 | Config file | Controls how much each factor counts in the priority score. Labelled Assumption.
+Risk thresholds (advanced) | Numbers between 0 and 1 | 0.40 / 0.55 / 0.70 | Cut-offs for MEDIUM, HIGH and CRITICAL. Labelled Assumption.
+Minimum coverage (advanced) | 0 to 50% | 25% | Fairness floor: share of need every area must receive.
+What-if changes | Water, food, medical: -60% to +60%; population: -30% to +60%; severity choice | 0% | Used only in the simulator to create Scenario B.
+Item | Description
+Purpose | Collect the datasets and the user inputs.
+Input | Your existing datasets and the scenario panel values.
+What happens | Load files with pandas. Print columns, data types, row counts and missing values. Build a feature map: column, meaning, which stage uses it.
+Output | A clean table of areas plus the scenario settings.
+Python tools | pandas, numpy
+Item | Description
+Purpose | Stop bad data from reaching the model.
+Input | Raw table and user inputs.
+What happens | Check required columns exist. Reject negative values. Fill or drop missing values. Scale numeric features. Show friendly messages instead of NaN or None.
+Output | Validated, model-ready table.
+Python tools | pandas, scikit-learn
+Item | Description
+Purpose | Estimate how many people each area will have affected, or which areas become critical.
+Input | Cleaned features (population, vulnerability, access, severity and others in your data).
+What happens | Train at least three models (for example Logistic or Linear baseline, Random Forest, XGBoost) with stratified split and cross-validation. Keep the best by a stated metric. Show probability only if the model provides it.
+Output | Predicted affected people (or risk class) per area, with metrics saved to metrics.json.
+Python tools | scikit-learn, xgboost, joblib
+Item | Description
+Purpose | Rank areas so the most urgent come first.
+Input | Predicted impact, predicted demand, shortage, medical need, accessibility.
+What happens | Min-max normalise each factor inside the current scenario, then take the weighted sum. Convert to LOW, MEDIUM, HIGH or CRITICAL using thresholds.
+Output | Priority score from 0 to 1 and a risk level for each area.
+Python tools | numpy, config file
+Item | Description
+Purpose | Work out how much each area needs and what is missing.
+Input | Predicted people, per-person needs, duration, supplies.
+What happens | Demand = people x per-person need x duration factor. Shortage = max(0, demand - available). Coverage = supply / demand.
+Output | Demand, shortage and coverage per area and per resource.
+Python tools | pandas
+Item | Description
+Purpose | Decide how to split limited supplies.
+Input | Demand, priority, supplies, minimum coverage.
+What happens | Linear programming: maximise priority-weighted coverage, subject to supply, demand and fairness limits. Report solver status. Call a result optimal only if the solver says so.
+Output | Units of food, water and medical kits sent to each area.
+Python tools | scipy.optimize.linprog or PuLP
+Item | Description
+Purpose | Turn numbers into instructions a manager can act on.
+Input | Allocation, priority, shortage before and after.
+What happens | Create an action card per area: Send now (critical), Send this cycle (high), Monitor (medium), No action needed (low). Build reasons from real numbers. Add warnings.
+Output | Action cards and warnings.
+Python tools | Python string templates
+Item | Description
+Purpose | Show why the model rated an area as it did.
+Input | Trained model and feature values.
+What happens | Run SHAP TreeExplainer. Produce global importance and per-area contributions. Also break the priority score into weighted parts.
+Output | Bar charts and a plain-English reason per area.
+Python tools | shap, plotly
+Item | Description
+Purpose | Test changed conditions.
+Input | Current scenario plus changes.
+What happens | Copy the scenario, apply the changes, rerun stages 3 to 8, then compare against the current result.
+Output | Before vs after table, scenario A vs B comparison.
+Python tools | core/simulate.py
+Item | Description
+Purpose | Show everything and keep a record.
+Input | All stage outputs.
+What happens | Render Streamlit pages. Write one audit row per run.
+Output | Eight pages and a downloadable CSV log.
+Python tools | streamlit, plotly, folium
+Score | Level | Meaning
+0.70 or more | CRITICAL | Immediate intervention recommended
+0.55 to 0.69 | HIGH | Allocate within the next response cycle
+0.40 to 0.54 | MEDIUM | Monitor consumption
+Below 0.40 | LOW | No immediate intervention
+Area | Water needed | Priority | Equal split | AI plan
+E (critical) | 50 | 0.90 | 33.3 (67%) | 50.0 (100%)
+F (high) | 60 | 0.70 | 40.0 (67%) | 40.0 (67%)
+A (low) | 40 | 0.20 | 26.7 (67%) | 10.0 (25%)
+Output | Shown on | How it is produced
+Total affected | Command Center | Sum of people affected from the dataset or input.
+Critical / high areas | Command Center | Count of areas above the priority thresholds.
+Resource coverage | Command Center, Optimizer | Supply divided by predicted demand, per resource.
+Total shortage | Command Center | Sum of unmet demand after the plan.
+Predicted affected people | Predictions | Output of the best trained model.
+Risk level | Predictions, Map | Priority score converted with thresholds.
+Prediction probability | Predictions | Shown only if the model provides predict_proba.
+Allocation plan | Resource Optimizer | Optimizer result: units per area and resource.
+Solver status | Resource Optimizer | Returned by the solver; optimal only if reported.
+Before vs after | Optimizer, Simulator | Equal-split baseline compared with the optimizer plan.
+Recommended actions | Command Center | Generated from allocation, priority and shortage numbers.
+Warnings | Command Center | Triggered by real conditions (coverage low, area newly critical).
+SHAP explanation | Explainability | SHAP values from the trained model.
+Priority breakdown | Explainability | Weighted parts of the priority score.
+Scenario comparison | Simulator | Scenario A and B results side by side.
+Model metrics | Model Performance | Calculated on the held-out test set.
+Audit log | Audit | One row per analysis run.
+Risk | Action label | Example text
+CRITICAL | Send now | Send [water, food, medical] to Area E. Reason: affected people expected to rise sharply and water coverage is low. Effect: water coverage rises from 67% to 100%.
+HIGH | Send this cycle | Allocate supplies to Area F within the next response cycle.
+MEDIUM | Monitor | Watch consumption in Area C.
+LOW | No action needed | Current resources are sufficient for Area A.
+Page | Purpose | User inputs | Outputs
+Command Center | Situation, AI summary, key actions | Disaster type, severity, duration, supplies, people per area; RUN AI ANALYSIS | KPIs, area ranking, allocation, top actions, warnings
+Predictions | Which areas will be critical | Choose model (optional) | Current vs predicted people, risk level, probability if available
+Resource Optimizer | How supplies are split | Minimum coverage, priority weights | Allocation table, before vs after, solver status
+Map | See risk by place | Click an area | Area detail, shortage, recommended action
+Explainability | Why the AI decided | Choose an area | Global importance, area SHAP, priority breakdown, plain words
+What-If Simulator | Test changes | Sliders for water, food, medical, population, severity | Before vs after, scenario A vs B, allocation changes
+Model Performance | Prove the model works | None (read-only) | Precision, recall, F1, ROC-AUC, PR-AUC, confusion matrix, model comparison
+Audit | Transparency | Download button | Decision log with inputs, model, allocation, solver status
+Change | What to look for
+Water supply down 30% | Water coverage falls; critical areas keep priority; low areas lose water first.
+Affected population up 20% | Demand rises; more areas may become HIGH or CRITICAL.
+Medical kits up 30% | Medical coverage improves; allocation shifts toward areas with medical need.
+Severity High to Extreme | Predicted affected people rise; shortages grow in every area.
+Duration 72 to 120 hours | Total demand rises; coverage falls.
+Problem | Message and behaviour
+Dataset file missing | Show: Dataset not found. Check the data folder. Stop the run.
+Required column missing | Name the missing column. Do not guess.
+Negative or non-numeric input | Reject with: Enter a number of 0 or more.
+All areas have zero population | Ask the user to enter people affected in at least one area.
+Zero supply for a resource | Show coverage 0% and a warning. Do not crash.
+Supply greater than total demand | Fill all demand; mark surplus as unallocated.
+Model file missing or fails to load | Show a clear message and offer to retrain.
+Optimizer infeasible | Show reason and relax the fairness floor suggestion.
+Division by zero, NaN or infinity | Replace with a friendly label such as Not available.
+Job | Library
+Data handling | pandas, numpy
+Machine learning | scikit-learn, xgboost (or LightGBM), joblib
+Optimization | scipy.optimize.linprog or PuLP
+Explainability | shap
+Charts and map | plotly, folium, streamlit-folium
+Web app | streamlit (multipage)
+Testing | pytest
+Dataset column | What it represents | Used by | Effect on decision
+[your column] | [meaning] | [model / priority / demand / optimizer] | [how it changes the result]
+[your column] | [meaning] | [stage] | [effect]
+[your column] | [meaning] | [stage] | [effect]
+Metric | Why it matters
+Precision | Of areas flagged high-risk, how many truly were.
+Recall | Of truly high-risk areas, how many were caught. Missing one is costly.
+F1 | Balance of precision and recall.
+ROC-AUC | Ability to separate high-risk from low-risk areas.
+PR-AUC | Preferred when classes are imbalanced.
+Confusion matrix | Shows exact counts of right and wrong predictions.
+MAE, RMSE, R2 | Use these instead if predicting a number such as affected people.
+Week | Tasks | Deliverable
+1 | Inspect data, clean it, train three models, save metrics | Feature map, models, metrics.json
+2 | Priority score, demand and shortage, LP optimizer, tests | Working core/ package with passing tests
+3 | SHAP, action cards, warnings, what-if simulator, audit log | Explanations and simulation
+4 | Streamlit pages, map, README, demo rehearsal | Finished app and documentation
+Question | Short answer
+Why this model? | It scored best on the stated metric (F1 or PR-AUC) in cross-validation; see metrics.json.
+Why linear programming? | The goal and limits are linear, LP is fast and its status shows whether the result is truly optimal.
+What does SHAP show? | How much each feature pushed an area's prediction up or down.
+How do you know it helps? | The plan is compared with an equal-split baseline and the reduction is calculated.
+What is fair about the plan? | Every area keeps a minimum share of its need.
+Which numbers are assumptions? | Per-person needs, priority weights, thresholds and the fairness floor.
+What if data is missing? | State it, or use clearly labelled synthetic data.
+Is it autonomous? | No. It recommends; people decide.
+Term | Meaning
+Coverage | Share of need that is met: available divided by required.
+Shortage | Unmet need: demand minus available, never below zero.
+Priority score | A number from 0 to 1 ranking how urgent an area is.
+LP (linear programming) | A method for finding the best values under linear limits.
+SHAP | A method that explains each feature's contribution to a prediction.
+What-if | Rerunning the analysis with changed inputs.
+Baseline | A simple comparison plan, here an equal split by need.
+SYNTHETIC | Data created for the demo, not from real sources.

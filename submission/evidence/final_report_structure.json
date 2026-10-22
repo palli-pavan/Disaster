@@ -1,0 +1,41 @@
+{
+  "pages": [
+    "Project Report",
+    "Introduction",
+    "System Design",
+    "Dataset Description",
+    "Implementation and Setup",
+    "Processing Methodology",
+    "Demand and Priority Calculations",
+    "Resource Allocation Model",
+    "Results of the Core Analysis",
+    "Area Allocation Results",
+    "Model Evaluation",
+    "Scenario Analysis",
+    "Dashboard for Disaster Inputs",
+    "Dashboard for AI Analysis",
+    "Dashboard for the Response Plan",
+    "Dashboard for Simulation and Audit History",
+    "Testing and Verification",
+    "Limitations and Future Work",
+    "Conclusion and Source Reference",
+    "Data Preparation Code",
+    "Affected Population Code",
+    "Resource Demand Code",
+    "Priority Calculation Code",
+    "Priority Calculation Code Continued",
+    "Resource Allocation Code",
+    "Resource Allocation Code Continued",
+    "Resource Allocation Code Continued",
+    "Damage Prediction Code",
+    "Decision Audit Code",
+    "Decision Audit Code Continued",
+    "React Analysis Request Code"
+  ],
+  "dashboard_files": [
+    "01_describe.jpg",
+    "02_ai_analysis.jpg",
+    "03_response_plan.jpg",
+    "04_what_if_and_audit.jpg"
+  ]
+}

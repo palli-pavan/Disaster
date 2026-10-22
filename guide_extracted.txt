@@ -1,0 +1,513 @@
+Phase-by-Phase Guide
+
+AI-Powered Emergency Resource Allocation & Decision Support System
+
+This guide explains each of the seven phases in the master prompt: what it is for, what the AI builds, what to check before moving on, and what to type next. The complete master prompt is included in the appendix.
+
+How the Phases Fit Together
+
+The system follows one chain, and each phase builds one or more links of it:
+
+Data -> ML prediction -> area priority -> demand & shortage -> LP optimization
+
+     -> recommended actions -> SHAP explanation -> what-if simulation
+
+Phase
+
+Name
+
+Part of the chain it builds
+
+1
+
+Inspect + Feature Map
+
+Data understanding
+
+2
+
+Data + Model + Metrics
+
+Data, ML prediction
+
+3
+
+Priority + Demand + Optimizer + Tests
+
+Area priority, demand and shortage, LP optimization
+
+4
+
+Actions + SHAP
+
+Recommended actions, SHAP explanation
+
+5
+
+Simulator + Comparison + Audit
+
+What-if simulation, optimization impact, audit trail
+
+6
+
+Streamlit UI + Map
+
+Dashboard that exposes every link
+
+7
+
+README + Demo Script
+
+Documentation and presentation
+
+How to Work Through Them
+
+Paste the master prompt once and upload your datasets in the same message.
+
+The AI completes one phase and stops.
+
+Run the code and do the checks listed for that phase.
+
+Only then reply continue. If something is wrong, describe the problem instead and let the AI fix it first.
+
+Phase 1: Inspect + Feature Map
+
+Goal
+
+Understand your data before writing any logic. The AI scans your project and reports exactly what exists, so nothing is invented later.
+
+What the AI builds
+
+A printout of every dataset: columns, data types, row counts, missing values.
+
+A list of any existing model files.
+
+A feature map table: column -> meaning -> used by (model / priority / demand / optimizer).
+
+A list of gaps, such as no warehouse, distance, or time-series data.
+
+Files produced
+
+No project code yet; only an inspection report or script.
+
+How to verify before moving on
+
+Every column name in the table really exists in your files.
+
+The gaps list is honest (e.g. 'no warehouse data').
+
+Each missing field is marked either 'unavailable' or 'SYNTHETIC'.
+
+Common problem
+
+If the AI cannot see your files, it will guess column names. Upload the datasets or paste df.head() and df.dtypes.
+
+What to type next
+
+continue
+
+Phase 2: Data + Model + Metrics
+
+Goal
+
+Create the clean data pipeline and the trained ML models that power every prediction.
+
+What the AI builds
+
+Loading, validation, and preprocessing code (handles missing values and bad input).
+
+At least three trained models, for example a baseline, Random Forest, and XGBoost.
+
+Stratified train/test split and cross-validation.
+
+metrics.json with real scores and the best model chosen by a stated metric.
+
+Files produced
+
+core/data.py, core/model.py, models/ (saved model + metrics.json).
+
+How to verify before moving on
+
+Run the training script; it finishes and creates metrics.json.
+
+Metrics include F1, ROC-AUC, PR-AUC and a confusion matrix (or MAE, RMSE, R2 for regression).
+
+Random seeds are fixed, so running twice gives the same scores.
+
+Probability is shown only if the model has predict_proba.
+
+Common problem
+
+Suspiciously perfect scores (100%) usually mean data leakage, such as the target or a copy of it being used as a feature.
+
+What to type next
+
+continue
+
+Phase 3: Priority + Demand + Optimizer + Tests
+
+Goal
+
+Turn predictions into numbers a manager can act on: who needs help most, how much they need, and how supplies should be split.
+
+What the AI builds
+
+Priority score per area with configurable weights and LOW/MEDIUM/HIGH/CRITICAL thresholds.
+
+Demand, shortage, and coverage calculations using labelled assumptions.
+
+A real linear-programming optimizer that allocates food, water, and medical kits.
+
+Readable messages for zero supply or infeasible cases.
+
+pytest tests for the key rules.
+
+Files produced
+
+core/priority.py, core/demand.py, core/optimizer.py, tests/.
+
+How to verify before moving on
+
+Run pytest; all tests pass.
+
+Allocation never exceeds supply or demand.
+
+Coverage and priority stay between 0 and 1.
+
+Solver status is shown, and 'optimal' appears only when the solver reports it.
+
+Hand-check one area's demand and shortage with a calculator.
+
+Common problem
+
+If the optimizer gives everything to one area, check the objective and that demand bounds (x_ik <= demand_ik) are applied.
+
+What to type next
+
+continue
+
+Phase 4: Actions + SHAP
+
+Goal
+
+Make the system a decision-support tool: tell the user what to do, and explain why the AI said so.
+
+What the AI builds
+
+Action cards with priority, area, resource, quantity, reason, and expected effect (shortage before -> after).
+
+'No action needed' cards for areas with enough supply.
+
+Dynamic warnings, such as coverage below threshold or an area newly critical.
+
+SHAP global importance, per-area explanation, and feature values.
+
+A priority-score breakdown showing each weighted component.
+
+Files produced
+
+core/actions.py, core/explain.py.
+
+How to verify before moving on
+
+Quantities in action cards match the optimizer output exactly.
+
+Reasons quote real numbers, not generic text.
+
+SHAP values are produced from the saved best model.
+
+Explanation text says it describes model behaviour, not causation.
+
+Common problem
+
+SHAP TreeExplainer works for tree models; if the best model is logistic regression, use a linear explainer or choose a tree-based model.
+
+What to type next
+
+continue
+
+Phase 5: Simulator + Comparison + Audit
+
+Goal
+
+Let users ask 'what if?' and keep a trustworthy record of every analysis.
+
+What the AI builds
+
+A function that re-runs the full pipeline with changed supply, population, severity, or duration.
+
+Before vs after results: critical areas, shortage per resource, coverage, allocation changes.
+
+Scenario A vs Scenario B comparison.
+
+Optimization impact: LP result versus an equal-share-by-population baseline, with percentage reduction.
+
+An audit log of each run, exportable as CSV.
+
+Files produced
+
+core/simulate.py, core/audit.py.
+
+How to verify before moving on
+
+Reduce water by 30% and confirm water shortage and coverage change in the expected direction.
+
+Percentage reduction equals (before - after) / before x 100, computed, not typed in.
+
+Each run adds a row to the audit log with timestamp, scenario, model, allocation, and solver status.
+
+Common problem
+
+If the simulator returns identical results after changes, the scenario values are probably not being passed into the pipeline.
+
+What to type next
+
+continue
+
+Phase 6: Streamlit UI + Map
+
+Goal
+
+Wrap all the logic in a professional emergency-operations dashboard.
+
+What the AI builds
+
+Eight pages: Command Center, Predictions, Resource Optimizer, Map, Explainability, Simulator, Model Performance, Audit.
+
+KPI cards with tooltips and a scenario panel with a RUN AI ANALYSIS button.
+
+A risk-coloured interactive map where clicking an area shows its details.
+
+Dark theme, caching for speed, friendly messages instead of NaN, inf, or None.
+
+Output labels: PREDICTION, OPTIMIZATION, SIMULATION, RECOMMENDATION.
+
+Files produced
+
+app/Home.py and app/pages/.
+
+How to verify before moving on
+
+Run: streamlit run app/Home.py.
+
+Click RUN AI ANALYSIS and see every page update.
+
+Enter bad input (negative supply, zero population) and confirm a readable error appears.
+
+No pages contain ML or optimization code; they only call core/.
+
+Common problem
+
+If the map is blank, the data probably lacks latitude/longitude. The AI should say so or use clearly marked SYNTHETIC coordinates.
+
+What to type next
+
+continue
+
+Phase 7: README + Demo Script
+
+Goal
+
+Package the project so examiners understand it and you can present it confidently.
+
+What the AI builds
+
+README with an architecture diagram and the data -> decision chain.
+
+Install and run instructions, with requirements.txt.
+
+A limitations section (assumptions, synthetic data, no real-world guarantee).
+
+A step-by-step demo script.
+
+Files produced
+
+README.md, requirements.txt.
+
+How to verify before moving on
+
+A fresh machine or virtual environment can run the app by following the README alone.
+
+Limitations are stated honestly.
+
+The demo script fits in 5 to 7 minutes.
+
+Common problem
+
+If the README claims features that do not exist, remove them. Examiners test claims.
+
+What to type next
+
+Finished. Rehearse the demo.
+
+Final Demo Story
+
+Open the Command Center with a flood scenario and press RUN AI ANALYSIS.
+
+Show the predicted critical areas and the recommended action cards.
+
+Click the most critical area and open its SHAP explanation.
+
+Show the optimizer result and the shortage reduction against the baseline.
+
+Cut water by 30% in the Simulator and show how the allocation changes.
+
+Open Model Performance and Audit to show the metrics and the decision log.
+
+Questions Examiners Often Ask
+
+Question
+
+Where your answer comes from
+
+Why this model?
+
+metrics.json: the best model by F1 or PR-AUC (Phase 2).
+
+How does the optimizer work?
+
+LP objective and constraints (Phase 3).
+
+What does SHAP show?
+
+Feature contributions to the model's prediction, not causation (Phase 4).
+
+Which numbers are assumptions?
+
+Per-capita needs, weights, and thresholds, labelled 'Assumption' in the UI.
+
+What is synthetic?
+
+Any field not in your data, marked 'SYNTHETIC' (Phase 1).
+
+Appendix: Full Master Prompt
+
+Copy everything below into your AI coding assistant.
+
+Role
+
+You are a senior Python ML engineer and decision-support systems architect. Build "AI-Powered Emergency Resource Allocation & Decision Support System" as a college Python course project that must look and work like a real emergency-operations tool. The system supports emergency managers; it never acts autonomously.
+
+Core Idea (the chain every output must follow)
+
+Data -> ML prediction -> area priority -> demand & shortage -> LP optimization -> recommended actions -> SHAP explanation -> what-if simulation.
+
+Every number on screen must be computed from data, a trained model, or the optimizer. Anything user-configured (weights, thresholds, per-person needs) must be labelled "Assumption" in the UI and editable in a sidebar.
+
+Tech Stack (fixed, do not change)
+
+Python 3.10+, pandas, numpy, scikit-learn, xgboost (or LightGBM), shap, scipy.optimize.linprog (or PuLP), plotly, streamlit (multipage app), folium + streamlit-folium for the map, joblib.
+
+Logic lives in a core/ package (no ML or optimization code inside Streamlit pages). Optionally expose the same functions through a FastAPI layer.
+
+Project Structure
+
+data/               raw + processed data
+
+core/data.py        load, validate, preprocess
+
+core/model.py       train, evaluate, predict, save/load
+
+core/priority.py    priority score + risk levels
+
+core/demand.py      demand, shortage, coverage
+
+core/optimizer.py   LP allocation
+
+core/explain.py     SHAP
+
+core/simulate.py    what-if + scenario comparison
+
+core/actions.py     recommended actions + warnings
+
+core/audit.py       decision log
+
+models/             saved models + metrics.json
+
+app/ (Streamlit)    Home.py + pages/
+
+tests/              pytest tests
+
+README.md
+
+Step 0 - Inspect First (mandatory)
+
+Scan the project. Print every dataset's columns, dtypes, row counts, missing values, and the existing model files. Produce a feature map table: column -> meaning -> used by (model / priority / demand / optimizer). Then STOP and show it to me.
+
+If a needed field does not exist (e.g. warehouses, distances, time series), do NOT invent it silently. Either (a) say the feature is unavailable, or (b) generate clearly labelled synthetic data via a documented script, marked "SYNTHETIC" in the UI.
+
+Module 1 - ML Prediction
+
+Choose a meaningful target supported by the data (e.g. area risk class or next-period affected population). Train at least 3 models (e.g. Logistic/Linear baseline, Random Forest, XGBoost) with stratified train/test split and cross-validation.
+
+Report real metrics: classification -> accuracy, precision, recall, F1, ROC-AUC, PR-AUC, confusion matrix; regression -> MAE, RMSE, R2. Save to models/metrics.json. Select the best model by a stated metric (F1 or PR-AUC if imbalanced).
+
+Show predicted probability only if predict_proba exists.
+
+Module 2 - Priority Score (transparent, configurable)
+
+priority_i = w1*norm(impact_i) + w2*norm(predicted_demand_i) + w3*norm(shortage_i)
+
+           + w4*norm(medical_need_i) + w5*accessibility_penalty_i
+
+Min-max normalise inside the current scenario. Weights and thresholds (LOW/MEDIUM/HIGH/CRITICAL) come from a config file and sidebar sliders. Use only features that exist in the data.
+
+Module 3 - Demand and Shortage
+
+demand_ik   = population_i * per_capita_need_k * duration   (per-capita needs are labelled assumptions)
+
+shortage_ik = max(0, demand_ik - available_ik)
+
+coverage_k  = total_available_k / total_demand_k
+
+Module 4 - Optimizer (real LP)
+
+Variables x_ik >= 0 (amount of resource k sent to area i).
+
+Maximize  sum_i sum_k priority_weight_i * x_ik / demand_ik
+
+(equivalently minimize priority-weighted unmet demand)
+
+subject to: sum_i x_ik <= supply_k;  x_ik <= demand_ik;  optional area capacity limits
+
+If distance/warehouse data exists, extend to a transportation LP (x_ijk = warehouse j -> area i) with cost term. If not, show "Source optimization unavailable - no warehouse data". Handle infeasible/zero-supply cases with readable messages. Only call a result "optimal" if the solver status says so.
+
+Module 5 - Recommended Actions
+
+Auto-generate action cards: priority, area, resource, quantity, reason (built from real numbers), expected effect (shortage before -> after). Include "no action needed" for sufficient areas. Add dynamic warnings (coverage below threshold, area newly critical, etc.).
+
+Module 6 - Explainability
+
+SHAP TreeExplainer for the chosen model: global importance bar chart, per-area waterfall/bar, feature values, and plain-English text. State: "Contributions describe model behaviour, not causation." Also decompose the priority score into its weighted components per area.
+
+Module 7 - What-if Simulator
+
+Sliders: water/food/medical supply (+/-%), population (+/-%), severity, duration. Re-run the full pipeline and show before vs after: critical areas, shortage per resource, coverage, allocation changes. Scenario A vs B comparison table + chart.
+
+Module 8 - Impact of Optimization
+
+Baseline = proportional (equal-share-by-population) allocation. Compare against the LP result: total shortage, % reduction, coverage gain. All computed.
+
+Module 9 - Audit Log
+
+Every run records timestamp, scenario inputs, model name, predictions, priority scores, allocation, top SHAP features, objective, solver status. Viewable and downloadable as CSV.
+
+Streamlit Pages
+
+Command Center (KPIs with tooltips: total affected, critical areas, supply, shortage, predicted high-risk areas, coverage %; scenario panel with RUN AI ANALYSIS; top actions) | Predictions | Resource Optimizer | Map (risk-coloured, click for area detail) | Explainability | Simulator | Model Performance | Audit.
+
+Dark theme, st.cache_data for speed. Label outputs PREDICTION / OPTIMIZATION / SIMULATION / RECOMMENDATION. Footer: "Decision-support tool; final decisions rest with emergency managers." Never display NaN, inf, or None; show friendly messages.
+
+Quality Rules
+
+Type hints and docstrings on all core functions; reproducible (random_state fixed).
+
+pytest tests: allocation never exceeds supply or demand; coverage in [0,1]; priority in [0,1]; zero-supply handled; same inputs give same outputs.
+
+Charts must answer a decision question, with titles, units, tooltips.
+
+Delivery Process
+
+Work in phases and stop after each: (1) inspect + feature map, (2) data + model + metrics, (3) priority + demand + optimizer + tests, (4) actions + SHAP, (5) simulator + comparison + audit, (6) Streamlit UI + map, (7) README with architecture diagram, how to run, limitations, and viewing demo script. After each phase tell me what you built, how to run it, and what you verified. Do not start the next phase until I say "continue".
+
+Begin with Phase 1 only.

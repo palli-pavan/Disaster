@@ -1,0 +1,9 @@
+{
+  "water_coverage_before": 27,
+  "water_coverage_after": 19,
+  "coverage_diff_pts": -8,
+  "total_shortage_before": 88630,
+  "total_shortage_after": 94629,
+  "shortage_diff": 5999,
+  "warning": "If water drops by 30.0%, regional coverage falls to 19%."
+}

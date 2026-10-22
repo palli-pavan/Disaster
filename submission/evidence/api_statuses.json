@@ -1,0 +1,8 @@
+{
+  "/api/health": "handler returned successfully",
+  "/api/analyze": "handler returned successfully",
+  "/api/analyze low stock": "handler returned successfully",
+  "/api/simulate": "handler returned successfully",
+  "/api/metrics": "handler returned successfully",
+  "/api/audit": "handler returned successfully"
+}

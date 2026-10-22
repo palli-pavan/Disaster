@@ -1,0 +1,44 @@
+{
+  "area_id": "A",
+  "predicted_class": "MEDIUM",
+  "contributions": [
+    {
+      "feature": "destroyed_buildings",
+      "feature_value": 26.0,
+      "shap_value": 1.1028,
+      "effect": "INCREASED RISK"
+    },
+    {
+      "feature": "population_density",
+      "feature_value": 1108.0,
+      "shap_value": 0.3637,
+      "effect": "INCREASED RISK"
+    },
+    {
+      "feature": "minor_damage",
+      "feature_value": 69.0,
+      "shap_value": 0.0935,
+      "effect": "INCREASED RISK"
+    },
+    {
+      "feature": "magnitude",
+      "feature_value": 7.5,
+      "shap_value": 0.0578,
+      "effect": "INCREASED RISK"
+    },
+    {
+      "feature": "major_damage",
+      "feature_value": 138.0,
+      "shap_value": -0.0401,
+      "effect": "DECREASED RISK"
+    },
+    {
+      "feature": "building_damage",
+      "feature_value": 233.0,
+      "shap_value": -0.02,
+      "effect": "DECREASED RISK"
+    }
+  ],
+  "narrative": "The ML model classified Area A as **MEDIUM** severity. The primary factor driving higher severity was **destroyed_buildings = 26.0** (SHAP impact: +1.1028). This was reinforced by **population_density = 1,108.0** (+0.3637). Conversely, **major_damage = 138.0** slightly mitigated the risk score (-0.0401). \n*Contributions describe model behaviour, not causation.*",
+  "disclaimer": "Contributions describe model behaviour, not causation."
+}

@@ -1,0 +1,74 @@
+{
+  "planned_sections": [
+    "Title and abstract",
+    "Report guide and project objectives",
+    "System architecture and source organization",
+    "Input datasets and machine learning features",
+    "Implementation steps for setup and execution",
+    "Implementation steps for the processing pipeline",
+    "Mathematical rules and configured assumptions",
+    "Optimization formulation and result interpretation",
+    "Output from the default core scenario",
+    "Output by area and recommended actions",
+    "Output from supply and population simulations",
+    "Model evaluation output and explainability",
+    "API analysis output and interface workflow",
+    "Verification results and execution environment",
+    "Current limitations and improvement steps",
+    "Demonstration and submission checklist",
+    "Code listing 1 Data preparation",
+    "Code listing 2 Affected population estimation",
+    "Code listing 3 Resource demand calculation",
+    "Code listing 4 Area priority calculation",
+    "Code listing 4 Area priority calculation continued",
+    "Code listing 5 Linear programming allocation",
+    "Code listing 5 Linear programming allocation continued",
+    "Code listing 5 Linear programming allocation continued",
+    "Code listing 6 Severity prediction",
+    "Code listing 7 Decision audit record",
+    "Code listing 7 Decision audit record continued",
+    "Code listing 8 React analysis request"
+  ],
+  "code_listings": [
+    [
+      "core/data.py",
+      118,
+      159
+    ],
+    [
+      "core/demand.py",
+      42,
+      59
+    ],
+    [
+      "core/demand.py",
+      62,
+      100
+    ],
+    [
+      "core/priority.py",
+      119,
+      210
+    ],
+    [
+      "core/optimizer.py",
+      94,
+      229
+    ],
+    [
+      "core/model.py",
+      321,
+      360
+    ],
+    [
+      "core/audit.py",
+      28,
+      99
+    ],
+    [
+      "frontend/src/App.jsx",
+      115,
+      157
+    ]
+  ]
+}

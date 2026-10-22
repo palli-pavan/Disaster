@@ -1,0 +1,450 @@
+=== PAGE 1 ===
+EMERGENCY DSS
+AI decision support
+DECIDE
+Command Center
+Predictions
+Resource Optimizer
+Map
+UNDERSTAND
+Explainability
+What-If Simulator
+TRUST
+Model Performance
+Audit Log
+Command Center
+Flood scenario: what is happening, what is coming, and what to do.
+SAMPLE DATA
+Flood Severity: High 72 hours Food 40,000 Water 40,000 Medical 2,500
+EDIT SCENARIO RUN AI ANALYSIS
+1  Situation → 2  Prediction & priority → 3  Allocation → 4  Actions → What-if test
+AI SUMMARY
+3 of 7 areas need priority attention: E (critical), F and D (high).
+Water and food cover about 56% of predicted need. The plan cuts unmet need in these 3 areas from 37,499 to  
+18,500 units.
+APPLY RECOMMENDED  
+PLAN
+1 What is happening?
+Current situation from your data.
+TOTAL AFFECTED
+22,455
+People in 7 areas
+CRITICAL / HIGH  
+AREAS
+1 / 2
+Priority score above  
+threshold
+TOTAL SHORTAGE
+64,444
+Units still unmet after  
+plan
+PREDICTED HIGH-RISK
+3
+Areas the model flags
+RESOURCES AVAILABLE
+82,500
+Food + water + medical  
+units
+AVG COVERAGE
+61%
+Average of 3 resources
+RESOURCE COVERAGE (supply / predicted need)
+Food 56%
+Water 56%
+Medical 73%
+WARNING Water coverage below 60%
+2 Which areas need attention first?
+AI predicts how many people will be affected, then ranks areas by priority score.
+AREA RANKING
+PREDICTION
+RANK AREA AFFECTED NOW → PREDICTED CHANGE RISK PRIORITY SCORE
+#1 Area E 4,176 →  6,500 +56% CRITICAL 0.91
+#2 Area F 3,800 →  5,000 +32% HIGH 0.74
+#3 Area D 4,000 →  5,200 +30% HIGH 0.68
+#4 Area C 3,300 →  3,900 +18% MEDIUM 0.51
+#5 Area B 2,900 →  3,400 +17% MEDIUM 0.42
+#6 Area G 2,429 →  2,600 +7% LOW 0.22
+#7 Area A 1,850 →  2,100 +14% LOW 0.18
+3 What should be sent where?
+Optimizer splits supply across areas. Each cell: units sent, of units needed (coverage).
+RECOMMENDED ALLOCATION
+OPTIMIZATION
+AREA RISK FOOD WATER MEDICAL
+Area E CRITICAL
+16,250  of 16,250  
+(100%)
+16,250  of 16,250  
+(100%)
+780  of 780  
+(100%)
+Area F HIGH
+12,500  of 12,500  
+(100%)
+12,500  of 12,500  
+(100%)
+600  of 600  
+(100%)
+IMPACT OF OPTIMIZATION
+UNMET NEED IN CRITICAL + HIGH AREAS
+Equal-share baseline 37,499
+AI-optimized plan 18,500
+−51%
+Reduction vs baseline. Every area keeps a 25% minimum
+
+=== PAGE 2 ===
+Area  
+D
+HIGH 3,750  of 13,000 (29%) 3,750  of 13,000 (29%) 624  of 624  
+(100%)
+Area C MEDIUM 2,438  of 9,750 (25%) 2,438  of 9,750 (25%) 253  of 468 (54%)
+Area  
+B
+MEDIUM 2,125  of 8,500 (25%) 2,125  of 8,500 (25%) 102  of 408 (25%)
+Area  
+G
+LOW 1,625  of 6,500 (25%) 1,625  of 6,500 (25%) 78  of 312 (25%)
+Area  
+A
+LOW 1,312  of 5,250 (25%) 1,312  of 5,250 (25%) 63  of 252 (25%)
+coverage.
+4 What should we do now?
+Top three recommended actions. Final decision rests with the emergency team.
+CRITICAL  Area E
+Send  16,250 water, 16,250 food, 780  
+medical kits
+Why:  Affected people expected to rise 56%; water  
+coverage 56% under equal share.
+Effect:  water coverage 56% → 100%
+HIGH  Area F
+Send  12,500 water, 12,500 food, 600  
+medical kits
+Why:  Affected people expected to rise 32%; water  
+coverage 56% under equal share.
+Effect:  water coverage 56% → 100%
+HIGH  Area D
+Send  3,750 water, 3,750 food, 624  
+medical kits
+Why:  Affected people expected to rise 30%; water  
+coverage 56% under equal share.
+Effect:  water coverage 56% → 29%
+Monitor only: Area A, Area G, Area B (lower priority; minimum coverage guaranteed).
+Decision-support tool; final decisions rest with emergency managers. Sample numbers are illustrative and are replaced by your data and model output.
+
+=== PAGE 3 ===
+EMERGENCY DSS
+AI decision support
+DECIDE
+Command Center
+Predictions
+Resource Optimizer
+Map
+UNDERSTAND
+Explainability
+What-If Simulator
+TRUST
+Model Performance
+Audit Log
+Predictions
+Which areas are likely to become critical, and by how much?
+SAMPLE DATA
+PREDICTED AFFECTED BY AREA
+PREDICTION
+AREA NOW PREDICTED CHANGE RISK
+Area E 4,176 6,500 +56% CRITICAL
+Area F 3,800 5,000 +32% HIGH
+Area D 4,000 5,200 +30% HIGH
+Area C 3,300 3,900 +18% MEDIUM
+Area B 2,900 3,400 +17% MEDIUM
+Area G 2,429 2,600 +7% LOW
+Area A 1,850 2,100 +14% LOW
+HOW TO READ THIS
+Predicted values come from the trained model. Risk  
+level comes from the priority score thresholds  
+(adjustable). A probability column appears only when  
+the chosen model provides one.
+CRITICAL score 0.85 or more
+HIGH 0.60 to 0.84
+MEDIUM 0.35 to 0.59
+LOW below 0.35
+CURRENT VS PREDICTED AFFECTED PEOPLE
+Area E 4,176 / 6,500
+Area F 3,800 / 5,000
+Area D 4,000 / 5,200
+Area C 3,300 / 3,900
+Area B 2,900 / 3,400
+Area G 2,429 / 2,600
+Area A 1,850 / 2,100
+Blue = now. Second bar = predicted (red when critical).
+Decision-support tool; final decisions rest with emergency managers. Sample numbers are illustrative and are replaced by your data and model output.
+
+=== PAGE 4 ===
+EMERGENCY DSS
+AI decision support
+DECIDE
+Command Center
+Predictions
+Resource Optimizer
+Map
+UNDERSTAND
+Explainability
+What-If Simulator
+TRUST
+Model Performance
+Audit Log
+Resource Optimizer
+How should limited supplies be split to protect the highest-priority areas?
+SAMPLE DATA
+UNMET NEED, BASELINE
+37,499
+Critical + high areas, equal share
+UNMET NEED, AI PLAN
+18,500
+Same areas, optimized
+REDUCTION
+51%
+(before - after) / before
+SOLVER STATUS
+OPTIMAL
+Shown from the solver result
+ALLOCATION BY AREA (units sent, of units needed)
+OPTIMIZATION
+AREA RISK FOOD WATER MEDICAL
+Area E CRITICAL 16,250  of 16,250 (100%) 16,250  of 16,250 (100%) 780  of 780 (100%)
+Area F HIGH 12,500  of 12,500 (100%) 12,500  of 12,500 (100%) 600  of 600 (100%)
+Area D HIGH 3,750  of 13,000 (29%) 3,750  of 13,000 (29%) 624  of 624 (100%)
+Area C MEDIUM 2,438  of 9,750 (25%) 2,438  of 9,750 (25%) 253  of 468 (54%)
+Area B MEDIUM 2,125  of 8,500 (25%) 2,125  of 8,500 (25%) 102  of 408 (25%)
+Area G LOW 1,625  of 6,500 (25%) 1,625  of 6,500 (25%) 78  of 312 (25%)
+Area A LOW 1,312  of 5,250 (25%) 1,312  of 5,250 (25%) 63  of 252 (25%)
+OBJECTIVE AND RULES
+Goal Minimise priority-weighted unmet need
+Rule 1 Sent ≤ supply
+Rule 2 Sent ≤ area need
+Rule 3 Min. 25% coverage each area
+Sources No warehouse data
+WATER COVERAGE BY AREA: BASELINE VS AI PLAN
+E
+F
+D
+C
+B
+G
+A
+Blue = baseline. Green = AI plan.
+Decision-support tool; final decisions rest with emergency managers. Sample numbers are illustrative and are replaced by your data and model output.
+
+=== PAGE 5 ===
+EMERGENCY DSS
+AI decision support
+DECIDE
+Command Center
+Predictions
+Resource Optimizer
+Map
+UNDERSTAND
+Explainability
+What-If Simulator
+TRUST
+Model Performance
+Audit Log
+Decision Map
+Click an area to see its risk, shortage and recommended action.
+SAMPLE DATA
+RISK MAP (layout is illustrative; real map uses coordinates from your data)
+Area E
+CRITICAL
+6,500 predicted
+Area F
+HIGH
+5,000 predicted
+Area D
+HIGH
+5,200 predicted
+Area C
+MEDIUM
+3,900 predicted
+Area B
+MEDIUM
+3,400 predicted
+Area G
+LOW
+2,600 predicted
+Area A
+LOW
+2,100 predicted
+CRITICAL HIGH MEDIUM LOW
+AREA E
+RECOMMENDATION
+CRITICAL
+Affected now 4,176
+Predicted 6,500
+Water needed 16,250
+Water sent 16,250
+Medical sent 780
+Priority score 0.91
+Top reasons: rising population, water shortage, high severity.
+WHY? SIMULATE APPLY
+Decision-support tool; final decisions rest with emergency managers. Sample numbers are illustrative and are replaced by your data and model output.
+
+=== PAGE 6 ===
+EMERGENCY DSS
+AI decision support
+DECIDE
+Command Center
+Predictions
+Resource Optimizer
+Map
+UNDERSTAND
+Explainability
+What-If Simulator
+TRUST
+Model Performance
+Audit Log
+AI Explainability
+Why did the model rate each area this way?
+SAMPLE DATA
+GLOBAL: WHAT MATTERS MOST (sample SHAP)
+SHAP
+Predicted affected population 0.31
+Water shortage 0.24
+Medical demand 0.18
+Severity 0.15
+Accessibility 0.07
+WHY IS AREA E CRITICAL? (sample SHAP)
+SHAP
+Predicted affected population +0.31
+Water shortage +0.24
+Medical demand +0.18
+Severity +0.15
+Accessibility -0.07
+Positive values raise predicted risk; negative values lower it.
+IN PLAIN WORDS
+Area E is rated CRITICAL mainly because its affected population is  
+predicted to grow and water supply is far below need.
+These values describe how the model behaves. They do not prove cause and  
+effect.
+PRIORITY SCORE BREAKDOWN (weights are assumptions)
+PART WEIGHT SCORE
+Impact 0.30 0.28
+Predicted demand 0.25 0.24
+Shortage 0.25 0.23
+Medical need 0.15 0.12
+Access penalty 0.05 0.04
+Decision-support tool; final decisions rest with emergency managers. Sample numbers are illustrative and are replaced by your data and model output.
+
+=== PAGE 7 ===
+EMERGENCY DSS
+AI decision support
+DECIDE
+Command Center
+Predictions
+Resource Optimizer
+Map
+UNDERSTAND
+Explainability
+What-If Simulator
+TRUST
+Model Performance
+Audit Log
+What-If Simulator
+Change conditions, rerun the pipeline, and compare plans.
+SAMPLE DATA
+CHANGE THE SCENARIO
+SIMULATION
+Water supply:  -30%
+Food supply:  0%
+Medical supply:  0%
+Affected population:  0%
+SIMULATE
+BEFORE VS AFTER: WATER -30%
+SIMULATION
+MEASURE CURRENT AFTER CHANGE
+Water coverage 56% 39% -17 pts
+Water shortage 31,750 43,750 +12,000
+Total shortage 64,444 76,444 +12,000
+Unmet need, critical + high 18,500 30,500 +12,000
+Water sent to Area E 16,250 4,750 -11,500
+Calculated by rerunning the same optimizer on the changed supply.
+SCENARIO A VS SCENARIO B
+A: CURRENT B: WATER -30% DIFFERENCE
+Water available 40,000 28,000 -12,000
+Water coverage 56% 39% -17 pts
+Total shortage 64,444 76,444 +12,000
+Decision-support tool; final decisions rest with emergency managers. Sample numbers are illustrative and are replaced by your data and model output.
+
+=== PAGE 8 ===
+EMERGENCY DSS
+AI decision support
+DECIDE
+Command Center
+Predictions
+Resource Optimizer
+Map
+UNDERSTAND
+Explainability
+What-If Simulator
+TRUST
+Model Performance
+Audit Log
+Model Performance
+Is the model reliable? Evidence from held-out test data (sample numbers).
+SAMPLE DATA
+PRECISION
+0.84
+Flagged areas that were truly high-
+risk
+RECALL
+0.81
+High-risk areas the model caught
+F1
+0.83
+Balance of precision and recall
+PR-AUC
+0.88
+Preferred when classes are  
+imbalanced
+MODEL COMPARISON (best chosen by F1)
+MODEL F1 PR-AUC RESULT
+Logistic Regression 0.74 0.79
+Random Forest 0.80 0.85
+XGBoost 0.83 0.88 BEST
+CONFUSION MATRIX
+Pred. high Pred. low
+Actual high
+38 9
+Actual low
+7 86
+TRAINING SETUP (sample)
+Split Stratified, 80/20
+Validation 5-fold cross-validation
+Random seed 42 (fixed)
+Note Accuracy alone is not used
+Decision-support tool; final decisions rest with emergency managers. Sample numbers are illustrative and are replaced by your data and model output.
+
+=== PAGE 9 ===
+EMERGENCY DSS
+AI decision support
+DECIDE
+Command Center
+Predictions
+Resource Optimizer
+Map
+UNDERSTAND
+Explainability
+What-If Simulator
+TRUST
+Model Performance
+Audit Log
+AI Decision Audit
+Every analysis is recorded so decisions can be reviewed.
+SAMPLE DATA
+DECISION LOG (sample entries)
+AUDIT
+TIME SCENARIO MODEL TOP FEATURES SOLVER DETAILS
+2026-10-08 10:12 Flood, High, base supply XGBoost Predicted pop., water shortage optimal OPEN
+2026-10-08 10:20 Water -30% XGBoost Water shortage, severity optimal OPEN
+2026-10-08 10:31 Population +20% XGBoost Predicted pop., medical demand optimal OPEN
+DOWNLOAD CSV
+EACH ENTRY RECORDS
+Scenario inputs, model used, predictions, priority scores, allocation, main influencing features, objective, solver status and timestamp.
+Decision-support tool; final decisions rest with emergency managers. Sample numbers are illustrative and are replaced by your data and model output.

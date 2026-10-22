@@ -1,0 +1,142 @@
+{
+  "audit_log.csv": {
+    "rows": 44,
+    "columns": [
+      "run_id",
+      "timestamp",
+      "scenario_name",
+      "model_name",
+      "solver_status",
+      "total_affected_pop",
+      "critical_areas",
+      "avg_priority_score",
+      "total_shortage",
+      "shortage_reduction_pct",
+      "dispatched_allocations",
+      "predictions_distribution",
+      "solver_statuses_detail",
+      "scenario_inputs",
+      "notes"
+    ]
+  },
+  "damage.csv": {
+    "rows": 10,
+    "columns": [
+      "area_id",
+      "disaster_id",
+      "building_damage",
+      "damaged_buildings",
+      "minor_damage",
+      "major_damage",
+      "destroyed_buildings",
+      "damage_severity"
+    ]
+  },
+  "disasters.csv": {
+    "rows": 3,
+    "columns": [
+      "disaster_id",
+      "disaster_type",
+      "date",
+      "country",
+      "region",
+      "location",
+      "magnitude",
+      "total_affected",
+      "total_deaths",
+      "economic_damage"
+    ]
+  },
+  "historical_disaster_damage.csv": {
+    "rows": 800,
+    "columns": [
+      "record_id",
+      "disaster_type",
+      "magnitude",
+      "total_buildings",
+      "building_damage",
+      "minor_damage",
+      "major_damage",
+      "destroyed_buildings",
+      "population_density",
+      "damage_severity",
+      "data_source"
+    ]
+  },
+  "hospitals.csv": {
+    "rows": 2,
+    "columns": [
+      "hospital_id",
+      "hospital_name",
+      "latitude",
+      "longitude",
+      "total_capacity",
+      "available_beds",
+      "emergency_capacity",
+      "medical_staff"
+    ]
+  },
+  "population.csv": {
+    "rows": 10,
+    "columns": [
+      "area_id",
+      "area_name",
+      "latitude",
+      "longitude",
+      "population",
+      "population_density",
+      "children_population",
+      "elderly_population"
+    ]
+  },
+  "resources.csv": {
+    "rows": 4,
+    "columns": [
+      "resource_id",
+      "resource_type",
+      "quantity",
+      "warehouse_id"
+    ]
+  },
+  "roads.csv": {
+    "rows": 22,
+    "columns": [
+      "source",
+      "destination",
+      "distance_km",
+      "travel_time_min",
+      "road_type",
+      "road_condition",
+      "road_status"
+    ]
+  },
+  "scenarios.csv": {
+    "rows": 3,
+    "columns": [
+      "scenario_id",
+      "name",
+      "description"
+    ]
+  },
+  "shelters.csv": {
+    "rows": 2,
+    "columns": [
+      "shelter_id",
+      "shelter_name",
+      "latitude",
+      "longitude",
+      "capacity",
+      "occupied",
+      "available_capacity"
+    ]
+  },
+  "warehouses.csv": {
+    "rows": 2,
+    "columns": [
+      "warehouse_id",
+      "warehouse_name",
+      "latitude",
+      "longitude"
+    ]
+  }
+}

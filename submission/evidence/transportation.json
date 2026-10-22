@@ -1,0 +1,39 @@
+{
+  "status": "OPTIMAL",
+  "resource_type": "Water",
+  "routes": [
+    {
+      "warehouse_id": "W1",
+      "warehouse_name": "Central Depot",
+      "area_id": "A",
+      "resource_type": "Water",
+      "quantity": 6390.0,
+      "distance_km": 1.12
+    },
+    {
+      "warehouse_id": "W1",
+      "warehouse_name": "Central Depot",
+      "area_id": "C",
+      "resource_type": "Water",
+      "quantity": 4313.0,
+      "distance_km": 1.11
+    },
+    {
+      "warehouse_id": "W1",
+      "warehouse_name": "Central Depot",
+      "area_id": "F",
+      "resource_type": "Water",
+      "quantity": 5112.0,
+      "distance_km": 5.48
+    },
+    {
+      "warehouse_id": "W1",
+      "warehouse_name": "Central Depot",
+      "area_id": "G",
+      "resource_type": "Water",
+      "quantity": 4185.0,
+      "distance_km": 4.01
+    }
+  ],
+  "total_shipped": 20000.0
+}

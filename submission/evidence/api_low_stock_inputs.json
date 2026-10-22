@@ -1,0 +1,443 @@
+{
+  "status": "success",
+  "overview": {
+    "total_affected": 22455,
+    "critical_areas": 1,
+    "high_areas": 3,
+    "solver_status": "OPTIMAL",
+    "coverages": {
+      "Food": 25,
+      "Water": 26,
+      "Medical_Kit": 92
+    },
+    "impact": {
+      "baseline_shortage": 102586,
+      "optimized_shortage": 101383,
+      "reduction_pct": 1
+    }
+  },
+  "areas": [
+    {
+      "area_name": "Area E",
+      "population": 4176,
+      "estimated_affected": 2297,
+      "priority_score": 0.79,
+      "priority_level": "CRITICAL",
+      "predicted_severity": "HIGH",
+      "latitude": 29.74,
+      "longitude": -95.34,
+      "demand": {
+        "Food": 13782,
+        "Water": 17228,
+        "Medical_Kit": 1240
+      },
+      "allocation": {
+        "Food": 0,
+        "Water": 402,
+        "Medical_Kit": 1240
+      },
+      "shortage": {
+        "Food": 13782,
+        "Water": 16825,
+        "Medical_Kit": 0
+      },
+      "reasons": "Rising displaced population and acute structural building collapses (37 destroyed)."
+    },
+    {
+      "area_name": "Area C",
+      "population": 3300,
+      "estimated_affected": 1815,
+      "priority_score": 0.66,
+      "priority_level": "HIGH",
+      "predicted_severity": "HIGH",
+      "latitude": 29.75,
+      "longitude": -95.35,
+      "demand": {
+        "Food": 10890,
+        "Water": 13612,
+        "Medical_Kit": 980
+      },
+      "allocation": {
+        "Food": 10212,
+        "Water": 13612,
+        "Medical_Kit": 980
+      },
+      "shortage": {
+        "Food": 678,
+        "Water": 0,
+        "Medical_Kit": 0
+      },
+      "reasons": "Rising displaced population and acute structural building collapses (116 destroyed)."
+    },
+    {
+      "area_name": "Area F",
+      "population": 3800,
+      "estimated_affected": 2090,
+      "priority_score": 0.66,
+      "priority_level": "HIGH",
+      "predicted_severity": "HIGH",
+      "latitude": 29.79,
+      "longitude": -95.4,
+      "demand": {
+        "Food": 12540,
+        "Water": 15675,
+        "Medical_Kit": 1129
+      },
+      "allocation": {
+        "Food": 0,
+        "Water": 0,
+        "Medical_Kit": 1129
+      },
+      "shortage": {
+        "Food": 12540,
+        "Water": 15675,
+        "Medical_Kit": 0
+      },
+      "reasons": "Rising displaced population and acute structural building collapses (31 destroyed)."
+    },
+    {
+      "area_name": "Area D",
+      "population": 4000,
+      "estimated_affected": 2200,
+      "priority_score": 0.52,
+      "priority_level": "HIGH",
+      "predicted_severity": "HIGH",
+      "latitude": 29.78,
+      "longitude": -95.39,
+      "demand": {
+        "Food": 13200,
+        "Water": 16500,
+        "Medical_Kit": 1188
+      },
+      "allocation": {
+        "Food": 0,
+        "Water": 0,
+        "Medical_Kit": 750
+      },
+      "shortage": {
+        "Food": 13200,
+        "Water": 16500,
+        "Medical_Kit": 438
+      },
+      "reasons": "Rising displaced population and acute structural building collapses (30 destroyed)."
+    },
+    {
+      "area_name": "Area A",
+      "population": 1850,
+      "estimated_affected": 555,
+      "priority_score": 0.33,
+      "priority_level": "MEDIUM",
+      "predicted_severity": "MEDIUM",
+      "latitude": 29.7604,
+      "longitude": -95.3698,
+      "demand": {
+        "Food": 3330,
+        "Water": 4162,
+        "Medical_Kit": 300
+      },
+      "allocation": {
+        "Food": 3330,
+        "Water": 4162,
+        "Medical_Kit": 300
+      },
+      "shortage": {
+        "Food": 0,
+        "Water": 0,
+        "Medical_Kit": 0
+      },
+      "reasons": "Rising displaced population and acute structural building collapses (26 destroyed)."
+    },
+    {
+      "area_name": "Area B",
+      "population": 2900,
+      "estimated_affected": 870,
+      "priority_score": 0.29,
+      "priority_level": "MEDIUM",
+      "predicted_severity": "MEDIUM",
+      "latitude": 29.77,
+      "longitude": -95.38,
+      "demand": {
+        "Food": 5220,
+        "Water": 6525,
+        "Medical_Kit": 470
+      },
+      "allocation": {
+        "Food": 0,
+        "Water": 0,
+        "Medical_Kit": 470
+      },
+      "shortage": {
+        "Food": 5220,
+        "Water": 6525,
+        "Medical_Kit": 0
+      },
+      "reasons": "Rising displaced population and acute structural building collapses (7 destroyed)."
+    },
+    {
+      "area_name": "Area G",
+      "population": 2429,
+      "estimated_affected": 243,
+      "priority_score": 0.21,
+      "priority_level": "LOW",
+      "predicted_severity": "LOW",
+      "latitude": 29.73,
+      "longitude": -95.33,
+      "demand": {
+        "Food": 1458,
+        "Water": 1822,
+        "Medical_Kit": 131
+      },
+      "allocation": {
+        "Food": 1458,
+        "Water": 1822,
+        "Medical_Kit": 131
+      },
+      "shortage": {
+        "Food": 0,
+        "Water": 0,
+        "Medical_Kit": 0
+      },
+      "reasons": "Rising displaced population and acute structural building collapses (2 destroyed)."
+    }
+  ],
+  "actions": [
+    {
+      "card_type": "DISPATCH_ACTION",
+      "priority_level": "CRITICAL",
+      "priority_score": 0.7858,
+      "area_id": "E",
+      "area_name": "Area E",
+      "resource": "Water",
+      "quantity": 402.5,
+      "unit": "L",
+      "initial_demand": 17227.5,
+      "shortage_before": 17227.5,
+      "shortage_after": 16825.0,
+      "reduction_pct": 2.3,
+      "reason": "Area E holds CRITICAL priority (score 0.79) with 2,297 affected residents and 37 destroyed structures. Predicted severity is HIGH.",
+      "expected_effect": "Shortage reduced from 17,227.5 L to 16,825.0 L (2.3% unmet need eliminated).",
+      "status": "RECOMMENDED"
+    },
+    {
+      "card_type": "DISPATCH_ACTION",
+      "priority_level": "CRITICAL",
+      "priority_score": 0.7858,
+      "area_id": "E",
+      "area_name": "Area E",
+      "resource": "Medical_Kit",
+      "quantity": 1240.4,
+      "unit": "kits",
+      "initial_demand": 1240.4,
+      "shortage_before": 1240.4,
+      "shortage_after": 0.0,
+      "reduction_pct": 100.0,
+      "reason": "Area E holds CRITICAL priority (score 0.79) with 2,297 affected residents and 37 destroyed structures. Predicted severity is HIGH.",
+      "expected_effect": "Shortage reduced from 1,240.4 kits to 0.0 kits (100.0% unmet need eliminated).",
+      "status": "RECOMMENDED"
+    },
+    {
+      "card_type": "DISPATCH_ACTION",
+      "priority_level": "HIGH",
+      "priority_score": 0.6599,
+      "area_id": "C",
+      "area_name": "Area C",
+      "resource": "Food",
+      "quantity": 10212.0,
+      "unit": "rations",
+      "initial_demand": 10890.0,
+      "shortage_before": 10890.0,
+      "shortage_after": 678.0,
+      "reduction_pct": 93.8,
+      "reason": "Area C holds HIGH priority (score 0.66) with 1,815 affected residents and 116 destroyed structures. Predicted severity is HIGH.",
+      "expected_effect": "Shortage reduced from 10,890.0 rations to 678.0 rations (93.8% unmet need eliminated).",
+      "status": "RECOMMENDED"
+    },
+    {
+      "card_type": "DISPATCH_ACTION",
+      "priority_level": "HIGH",
+      "priority_score": 0.6599,
+      "area_id": "C",
+      "area_name": "Area C",
+      "resource": "Water",
+      "quantity": 13612.5,
+      "unit": "L",
+      "initial_demand": 13612.5,
+      "shortage_before": 13612.5,
+      "shortage_after": 0.0,
+      "reduction_pct": 100.0,
+      "reason": "Area C holds HIGH priority (score 0.66) with 1,815 affected residents and 116 destroyed structures. Predicted severity is HIGH.",
+      "expected_effect": "Shortage reduced from 13,612.5 L to 0.0 L (100.0% unmet need eliminated).",
+      "status": "RECOMMENDED"
+    },
+    {
+      "card_type": "DISPATCH_ACTION",
+      "priority_level": "HIGH",
+      "priority_score": 0.6599,
+      "area_id": "C",
+      "area_name": "Area C",
+      "resource": "Medical_Kit",
+      "quantity": 980.1,
+      "unit": "kits",
+      "initial_demand": 980.1,
+      "shortage_before": 980.1,
+      "shortage_after": 0.0,
+      "reduction_pct": 100.0,
+      "reason": "Area C holds HIGH priority (score 0.66) with 1,815 affected residents and 116 destroyed structures. Predicted severity is HIGH.",
+      "expected_effect": "Shortage reduced from 980.1 kits to 0.0 kits (100.0% unmet need eliminated).",
+      "status": "RECOMMENDED"
+    },
+    {
+      "card_type": "DISPATCH_ACTION",
+      "priority_level": "HIGH",
+      "priority_score": 0.6596,
+      "area_id": "F",
+      "area_name": "Area F",
+      "resource": "Medical_Kit",
+      "quantity": 1128.6,
+      "unit": "kits",
+      "initial_demand": 1128.6,
+      "shortage_before": 1128.6,
+      "shortage_after": 0.0,
+      "reduction_pct": 100.0,
+      "reason": "Area F holds HIGH priority (score 0.66) with 2,090 affected residents and 31 destroyed structures. Predicted severity is HIGH.",
+      "expected_effect": "Shortage reduced from 1,128.6 kits to 0.0 kits (100.0% unmet need eliminated).",
+      "status": "RECOMMENDED"
+    },
+    {
+      "card_type": "DISPATCH_ACTION",
+      "priority_level": "HIGH",
+      "priority_score": 0.5239,
+      "area_id": "D",
+      "area_name": "Area D",
+      "resource": "Medical_Kit",
+      "quantity": 750.2,
+      "unit": "kits",
+      "initial_demand": 1188.0,
+      "shortage_before": 1188.0,
+      "shortage_after": 437.8,
+      "reduction_pct": 63.1,
+      "reason": "Area D holds HIGH priority (score 0.52) with 2,200 affected residents and 30 destroyed structures. Predicted severity is HIGH.",
+      "expected_effect": "Shortage reduced from 1,188.0 kits to 437.8 kits (63.1% unmet need eliminated).",
+      "status": "RECOMMENDED"
+    },
+    {
+      "card_type": "DISPATCH_ACTION",
+      "priority_level": "MEDIUM",
+      "priority_score": 0.3273,
+      "area_id": "A",
+      "area_name": "Area A",
+      "resource": "Food",
+      "quantity": 3330.0,
+      "unit": "rations",
+      "initial_demand": 3330.0,
+      "shortage_before": 3330.0,
+      "shortage_after": 0.0,
+      "reduction_pct": 100.0,
+      "reason": "Area A holds MEDIUM priority (score 0.33) with 555 affected residents and 26 destroyed structures. Predicted severity is MEDIUM.",
+      "expected_effect": "Shortage reduced from 3,330.0 rations to 0.0 rations (100.0% unmet need eliminated).",
+      "status": "RECOMMENDED"
+    },
+    {
+      "card_type": "DISPATCH_ACTION",
+      "priority_level": "MEDIUM",
+      "priority_score": 0.3273,
+      "area_id": "A",
+      "area_name": "Area A",
+      "resource": "Water",
+      "quantity": 4162.5,
+      "unit": "L",
+      "initial_demand": 4162.5,
+      "shortage_before": 4162.5,
+      "shortage_after": 0.0,
+      "reduction_pct": 100.0,
+      "reason": "Area A holds MEDIUM priority (score 0.33) with 555 affected residents and 26 destroyed structures. Predicted severity is MEDIUM.",
+      "expected_effect": "Shortage reduced from 4,162.5 L to 0.0 L (100.0% unmet need eliminated).",
+      "status": "RECOMMENDED"
+    },
+    {
+      "card_type": "DISPATCH_ACTION",
+      "priority_level": "MEDIUM",
+      "priority_score": 0.3273,
+      "area_id": "A",
+      "area_name": "Area A",
+      "resource": "Medical_Kit",
+      "quantity": 299.7,
+      "unit": "kits",
+      "initial_demand": 299.7,
+      "shortage_before": 299.7,
+      "shortage_after": 0.0,
+      "reduction_pct": 100.0,
+      "reason": "Area A holds MEDIUM priority (score 0.33) with 555 affected residents and 26 destroyed structures. Predicted severity is MEDIUM.",
+      "expected_effect": "Shortage reduced from 299.7 kits to 0.0 kits (100.0% unmet need eliminated).",
+      "status": "RECOMMENDED"
+    },
+    {
+      "card_type": "DISPATCH_ACTION",
+      "priority_level": "MEDIUM",
+      "priority_score": 0.2857,
+      "area_id": "B",
+      "area_name": "Area B",
+      "resource": "Medical_Kit",
+      "quantity": 469.8,
+      "unit": "kits",
+      "initial_demand": 469.8,
+      "shortage_before": 469.8,
+      "shortage_after": 0.0,
+      "reduction_pct": 100.0,
+      "reason": "Area B holds MEDIUM priority (score 0.29) with 870 affected residents and 7 destroyed structures. Predicted severity is MEDIUM.",
+      "expected_effect": "Shortage reduced from 469.8 kits to 0.0 kits (100.0% unmet need eliminated).",
+      "status": "RECOMMENDED"
+    },
+    {
+      "card_type": "DISPATCH_ACTION",
+      "priority_level": "LOW",
+      "priority_score": 0.2086,
+      "area_id": "G",
+      "area_name": "Area G",
+      "resource": "Food",
+      "quantity": 1458.0,
+      "unit": "rations",
+      "initial_demand": 1458.0,
+      "shortage_before": 1458.0,
+      "shortage_after": 0.0,
+      "reduction_pct": 100.0,
+      "reason": "Area G holds LOW priority (score 0.21) with 243 affected residents and 2 destroyed structures. Predicted severity is LOW.",
+      "expected_effect": "Shortage reduced from 1,458.0 rations to 0.0 rations (100.0% unmet need eliminated).",
+      "status": "RECOMMENDED"
+    },
+    {
+      "card_type": "DISPATCH_ACTION",
+      "priority_level": "LOW",
+      "priority_score": 0.2086,
+      "area_id": "G",
+      "area_name": "Area G",
+      "resource": "Water",
+      "quantity": 1822.5,
+      "unit": "L",
+      "initial_demand": 1822.5,
+      "shortage_before": 1822.5,
+      "shortage_after": 0.0,
+      "reduction_pct": 100.0,
+      "reason": "Area G holds LOW priority (score 0.21) with 243 affected residents and 2 destroyed structures. Predicted severity is LOW.",
+      "expected_effect": "Shortage reduced from 1,822.5 L to 0.0 L (100.0% unmet need eliminated).",
+      "status": "RECOMMENDED"
+    },
+    {
+      "card_type": "DISPATCH_ACTION",
+      "priority_level": "LOW",
+      "priority_score": 0.2086,
+      "area_id": "G",
+      "area_name": "Area G",
+      "resource": "Medical_Kit",
+      "quantity": 131.2,
+      "unit": "kits",
+      "initial_demand": 131.2,
+      "shortage_before": 131.2,
+      "shortage_after": 0.0,
+      "reduction_pct": 100.0,
+      "reason": "Area G holds LOW priority (score 0.21) with 243 affected residents and 2 destroyed structures. Predicted severity is LOW.",
+      "expected_effect": "Shortage reduced from 131.2 kits to 0.0 kits (100.0% unmet need eliminated).",
+      "status": "RECOMMENDED"
+    }
+  ]
+}

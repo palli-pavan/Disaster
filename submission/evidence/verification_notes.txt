@@ -1,0 +1,31 @@
+ReliefPlan AI verification notes
+Date: 16 October 2026
+
+Existing test suite
+Command: C:\Python313\python.exe -m pytest tests -v
+Observed result: 24 passed, 1 warning in 19.94s
+The warning is a pandas FutureWarning from core/explain.py line 141.
+All tests in the five supplied test modules passed.
+
+React build
+Command: bundled Node executable node_modules/vite/bin/vite.js build
+Vite version: 8.3.2
+1938 modules transformed
+dist/index.html                   0.45 kB, gzip 0.29 kB
+dist/assets/index-DMLhl846.css   26.60 kB, gzip 9.03 kB
+dist/assets/index-D8iwmJ7A.js   403.65 kB, gzip 122.81 kB
+Observed result: build completed in 821ms
+
+Evidence capture
+Run capture_outputs.py with the project Python environment.
+This script executes the core pipeline, transportation and SHAP routines,
+then invokes FastAPI handlers directly using Pydantic request objects.
+It does not perform HTTP or browser end to end testing.
+New analysis audit records are redirected to verification_audit.csv.
+The source, input CSVs, model artifacts and original audit log are preserved.
+Model metrics are from the supplied models/metrics.json, not new training.
+
+Known behavior confirmed by comparison
+Changing stock inputs in the API analysis to 1 leaves returned allocations
+unchanged because total_quantity is updated while quantity is consumed.
+See api_analysis.json and api_low_stock_inputs.json.
